@@ -1,37 +1,32 @@
 import './App.css';
-import { useState } from 'react';
-import Card from './components/Card.js';
-
+import { useEffect, useState } from 'react';
 function App() {
- const userDetails = [
-  {
-    username: 'Manohar',
-    age: 20,
-    city: 'Kurnool',
-  },
-  {
-    username: 'Tagore',
-    age: 20,
-    city: 'Atmakur',
-  },
-  {
-    username: 'Kavitha',
-    age: 20,
-    city: 'Julekal',
-  },
- ];
-
- let [user, setDetails] = useState(userDetails);
-
- return (
-  <div className='text-center bg-info '>
-    <h1>User Details</h1>
-    {
-      user.map((obj,ind)=><Card user={obj} key={ind}/>)
-    }
-    
+  let [posts,setPosts]=useState([]);
+  useEffect(()=>{
+  fetch('https://jsonplaceholder.typicode.com/posts').then(res=>res.json()).then(data=>setPosts(data),[]);
+},[]);
+return (
+  <div className='text-center container '>
+    <table className='table'>
+      <thead>
+        <tr>
+          <th>userId</th>
+          <th>id</th>
+          <th>title</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+        posts.map((post)=><tr key={posts.id}>
+          <td>{post.userId}</td>
+          <td>{post.id}</td>
+          <td>{post.title}</td>
+        </tr>)
+}
+      </tbody>
+    </table>
   </div>
- );
+);
 }
 
 export default App;
