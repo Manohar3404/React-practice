@@ -1,20 +1,37 @@
 import './App.css';
-import {useState} from 'react';
-import Test1 from './components/Test1';
-function App() {
-  //state
-let username='Manohar';
-let getdata=(data)=>{
-  console.log('recieved data is ',data);
-}
+import { useState } from 'react';
+import Card from './components/Card.js';
 
-let city='Kurnool';
-  return (
-    <div className='text-center'>
-      <Test1 username={username} city={city} getdata={getdata} />
-     
-    </div>
-  );
+function App() {
+ const userDetails = [
+  {
+    username: 'Manohar',
+    age: 20,
+    city: 'Kurnool',
+  },
+  {
+    username: 'Tagore',
+    age: 20,
+    city: 'Atmakur',
+  },
+  {
+    username: 'Kavitha',
+    age: 20,
+    city: 'Julekal',
+  },
+ ];
+
+ let [user, setDetails] = useState(userDetails);
+
+ return (
+  <div className='text-center bg-info '>
+    <h1>User Details</h1>
+    {
+      user.map((obj,ind)=><Card user={obj} key={ind}/>)
+    }
+    
+  </div>
+ );
 }
 
 export default App;
