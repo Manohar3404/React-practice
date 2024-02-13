@@ -1,9 +1,11 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 function App() {
   let [posts,setPosts]=useState([]);
   useEffect(()=>{
-  fetch('https://jsonplaceholder.typicode.com/posts').then(res=>res.json()).then(data=>setPosts(data),[]);
+  //fetch('https://jsonplaceholder.typicode.com/posts').then(res=>res.json()).then(data=>setPosts(data),[]);
+  axios.get('https://jsonplaceholder.typicode.com/posts').then(res=>setPosts(res.data));
 
 },[]);
 return (
