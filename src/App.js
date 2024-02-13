@@ -5,7 +5,14 @@ function App() {
   let [posts,setPosts]=useState([]);
   useEffect(()=>{
   //fetch('https://jsonplaceholder.typicode.com/posts').then(res=>res.json()).then(data=>setPosts(data),[]);
-  axios.get('https://jsonplaceholder.typicode.com/posts').then(res=>setPosts(res.data));
+ // axios.get('https://jsonplaceholder.typicode.com/posts').then(res=>setPosts(res.data));
+ const fetchData= async()=>{
+  let res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  let posts = await res.json();
+  setPosts(posts);
+
+ }
+ fetchData()
 
 },[]);
 return (
